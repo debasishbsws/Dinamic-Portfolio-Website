@@ -1,0 +1,34 @@
+
+body {
+    background-image: linear-gradient(to bottom right, rgb(197, 157, 209), rgb(70, 51, 199))
+}
+
+.boundaryWidth{
+    width: 84%;
+}
+
+.navbar {
+    margin-top: 2vh;
+    border-radius: 10px;
+}
+
+.sectionDiv {
+    background-color: white;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    padding: 2vh 7%;
+    border-radius: 10px;
+    min-height: 84vh;
+}
+
+/* carousel items css */
+.carousel-control-prev {
+    margin-left: -130px;
+}
+.carousel-control-next {
+    margin-right: -130px;
+}
+.carousel-control-next,
+.carousel-control-prev{
+    filter: invert(100%);
+}

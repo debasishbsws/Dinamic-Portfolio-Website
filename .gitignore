@@ -1,0 +1,7 @@
+node_modules/
+.npm
+build
+npm-debug.log
+.env
+.DS_Store
+package-lock.json
