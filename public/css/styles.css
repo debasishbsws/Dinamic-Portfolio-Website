@@ -11,6 +11,14 @@ body {
     margin-top: 2vh;
     border-radius: 10px;
 }
+.codeIcon {
+    display: inline;
+    size: 3rem;
+}
+.navSignature {
+    min-height: 3vh;
+    max-height: 6vh;
+}
 
 .sectionDiv {
     background-color: white;
@@ -19,6 +27,10 @@ body {
     padding: 2vh 7%;
     border-radius: 10px;
     min-height: 84vh;
+}
+
+.circle {
+    border-radius: 100%;
 }
 
 /* carousel items css */
@@ -31,4 +43,19 @@ body {
 .carousel-control-next,
 .carousel-control-prev{
     filter: invert(100%);
+}
+.col {
+    height: 60vh;
+}
+/* .carouslrCard {
+    background-color: aqua;
+} */
+
+.aboutLeft {
+    padding-left: 2vw;
+}
+.aboutImage {
+    /* margin-left: 2vw; */
+    height: 50%;
+    margin-bottom: 2vh;
 }
