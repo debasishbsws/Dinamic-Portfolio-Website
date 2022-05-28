@@ -1,6 +1,7 @@
 
 body {
-    background-image: linear-gradient(to bottom right, rgb(197, 157, 209), rgb(70, 51, 199))
+    background-image: linear-gradient(to bottom right, rgb(197, 157, 209), rgb(70, 51, 199));
+    /* filter: blur(8px);  */
 }
 
 .boundaryWidth{
@@ -28,7 +29,9 @@ body {
     border-radius: 10px;
     min-height: 84vh;
 }
-
+.asideSecDiv {
+    margin-left: 1vh; padding: 2vh 2%;
+}
 .circle {
     border-radius: 100%;
 }
@@ -58,4 +61,6 @@ body {
     /* margin-left: 2vw; */
     height: 50%;
     margin-bottom: 2vh;
+    margin-right: 2vw;
+    float: right;
 }
