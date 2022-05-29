@@ -1,18 +1,20 @@
 // requireing package
 const express = require("express");
-
+const showdown = require('showdown');
+require('dotenv').config();
 const { GraphQLClient, gql } = require('graphql-request');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
+converter = new showdown.Converter();
 //port
 const port = 8080;
 
 //github username, token, endpoint
 const githubData = {
-    token: "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",
+    token: process.env.GITHUB_API,
     username: "debasishbsws",
     endpoint: "https://api.github.com/graphql"
 };
@@ -56,26 +58,19 @@ app.get("/", async (req, res) => {
 
     //render with info
     res.render("index", {
+        page: "",
         pinnedRepos: githubInfo.user.pinnedItems.edges,
         avatarUrl: githubInfo.user.avatarUrl
     });
 });
 
-app.get("/prepo", async (req, res) => {
-    // console.log();
-    const pinnedRepo = await graphQLCline.request(pinnedRepoQuery);
-    console.log(pinnedRepo);
-    res.send(pinnedRepo);
-    // res.render("blogHome", { pinnedRepos: pinnedRepo.user });
-});
+app.get("/projects/:projectName", async (req, res) => {
 
-app.get("/a", async (req, res) => {
-    const repo = await graphQLCline.request(q);
-    res.send(repo);
-});
-
-const q = gql`{
-repository(name: "Travel-Agency-Website", owner: "debasishbsws") {
+    //graphQl query for repo info
+    const repoInfoQuery = gql`{
+repository(name: "${req.params.projectName}", owner: "${githubData['username']}") {
+    url
+    updatedAt
     upCase: object(expression: "HEAD:README.md") {
       ... on Blob {
         text
@@ -83,42 +78,30 @@ repository(name: "Travel-Agency-Website", owner: "debasishbsws") {
     }
   }
 }`
+    const repoInfo = await graphQLCline.request(repoInfoQuery);
+    let readmeHtml;
+    if (typeof repoInfo.repository.upCase.text == 'undefined' || repoInfo.repository.upCase.text == null) {
+        readmeHtml = "<h1>README.md dosen't exist.</h1>"
+    }
+    else {
+        readmeHtml = converter.makeHtml(repoInfo.repository.upCase.text)
+    }
+
+    res.render("project", {
+        page: "/",
+        url: repoInfo.repository.url,
+        text: readmeHtml,
+    });
+});
+
+// app.get("/a", async (req, res) => {
+//     const repoInfo = await graphQLCline.request(q);
+//     res.send(repoInfo);
+// });
+
 //end------------------------------------------------------------------------
-// const getPinnedRepo = () => {
-//     //pinned repo query
-//     const pinnedRepoQuery = gql`{
-//     user(login: "${githubData['username']}") {
-//         name
-//         pinnedItems(last: 6) {
-//             edges {
-//                 node {
-//         	        ... on RepositoryInfo{
-//                         name
-//                         url
-//                         updatedAt
-//                         description
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }`;
-//     pinnedRepo = graphQLCline.request(pinnedRepoQuery);
-// }
+
 
 app.listen(port, () => {
     console.log("[Server]: Server is runing on http://localhost:" + port + '/');
 });
-
-
-
-
-// resourcePath
-// mirrorUrl
-// homepageUrl
-
-// {
-//     repository(name: "Travel-Agency-Website", owner: "debasishbsws") {
-//         id
-//     }
-// }

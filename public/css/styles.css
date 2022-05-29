@@ -29,6 +29,13 @@ body {
     border-radius: 10px;
     min-height: 84vh;
 }
+.titleDiv{
+    background-color: white;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    border-radius: 10px;
+    min-height: 10vh;
+}
 .asideSecDiv {
     margin-left: 1vh; padding: 2vh 2%;
 }
@@ -53,7 +60,9 @@ body {
 /* .carouslrCard {
     background-color: aqua;
 } */
-
+.inlineText{
+    display: inline;
+}
 .aboutLeft {
     padding-left: 2vw;
 }
