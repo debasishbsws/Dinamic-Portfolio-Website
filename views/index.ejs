@@ -26,8 +26,7 @@
         <div class="row">
 
           <div class="col">
-            <img class="circle aboutImage " src="https://avatars.githubusercontent.com/Debasishbsws"
-              alt="Debasish-Profile">
+            <img class="circle aboutImage " src="<%= avatarUrl %> " alt="Debasish-Profile">
             <h2 class="display-6 text-end">Debasish Biswas</h2>
           </div>
 
@@ -79,21 +78,20 @@
                   <div class="card card-cover h-100 overflow-hidden text-white rounded-4 shadow-lg">
                     <div class="d-flex flex-column h-100 p-4 pb-2 text-white bg-primary text-shadow-1">
                       <h3 class="mb-2 lh-1 display-6">
-                        Blog-Post-Website-Using-Node-js
+                        <%= pinnedRepos[i].node.name %>
                       </h3>
                       <hr>
-                      <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut
-                        labore et dolore magna
-                        aliqua.</p>
+                      <p class="pt-2">
+                        <%= pinnedRepos[i].node.description %>
+                      </p>
                       <ul class="d-flex list-unstyled mt-auto">
                         <li class="me-auto">
-                          <a href="#">
+                          <a href="<%= pinnedRepos[i].node.url %>">
                             <h3 style="color: black ;"><i class="bi bi-github"></i></h3>
                           </a>
                         </li>
                         <li class="d-flex align-items-center me-3">
-                          <a class="btn btn-dark">Details</a>
+                          <a href="#" class="btn btn-dark">Details</a>
                         </li>
                       </ul>
                     </div>
@@ -114,16 +112,15 @@
                   <div class="card card-cover h-100 overflow-hidden text-white rounded-4 shadow-lg">
                     <div class="d-flex flex-column h-100 p-4 pb-2 text-white bg-primary text-shadow-1">
                       <h3 class="mb-2 lh-1 display-6">
-                        Blog-Post-Website-Using-Node-js
+                        <%= pinnedRepos[i].node.name %>
                       </h3>
                       <hr>
-                      <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut
-                        labore et dolore magna
-                        aliqua.</p>
+                      <p class="pt-2">
+                        <%= pinnedRepos[i].node.description %>
+                      </p>
                       <ul class="d-flex list-unstyled mt-auto">
                         <li class="me-auto">
-                          <a href="#">
+                          <a href="<%= pinnedRepos[i].node.url %>">
                             <h3 style="color: black ;"><i class="bi bi-github"></i></h3>
                           </a>
                         </li>
