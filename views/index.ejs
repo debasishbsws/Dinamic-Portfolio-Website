@@ -167,7 +167,28 @@
         <div class="col col-md-9 sectionDiv overflow-auto">
           <h1>#blogs</h1>
 
+          <% posts.forEach((post)=>{ %>
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+              style="max-height: 250px ;">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Tech</strong>
+                <h3 class="mb-0">
+                  <%= post.title %>
+                </h3>
+                <div class="mb-1 text-muted">
+                  <%= post.dateAdded.split("T")[0] %>
+                </div>
+                <p class="card-text mb-auto">
+                  <%= post.brief %><a href="https://debasishbsws.hashnode.dev/<%= post.slug %>"
+                      class="stretched-link">Continue reading</a>
+                </p>
+              </div>
+            </div>
+            <% })%>
 
+              <!-- -------------------------------foot------------------------- -->
+
+              <!-- -------------------------------foot------------------------- -->
 
         </div>
 

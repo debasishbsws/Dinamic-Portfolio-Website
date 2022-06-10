@@ -68,6 +68,7 @@ const hashnodeQuerry = gql`{
         title
         brief
         slug
+        dateAdded
       }
     }
   }
@@ -80,12 +81,15 @@ app.get("/", async (req, res) => {
     //geting github info
     const githubInfo = await graphQLClineGitHub.request(pinnedRepoQuery);
 
+    const info = await graphQLClineHashnode.request(hashnodeQuerry);
+
     //render with info
     res.render("index", {
         page: "",
         pinnedRepos: githubInfo.user.pinnedItems.edges,
         avatarUrl: githubInfo.user.avatarUrl,
         githubUrl: githubInfo.user.url,
+        posts: info.user.publication.posts,
     });
 });
 
@@ -124,7 +128,7 @@ repository(name: "${req.params.projectName}", owner: "${githubData['username']}"
 
 app.get("/a", async (req, res) => {
     const info = await graphQLClineHashnode.request(hashnodeQuerry);
-    res.render("blog", { page: "/" });
+    res.send(info);
 });
 
 
