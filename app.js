@@ -1,35 +1,32 @@
 // requireing package
 const express = require("express");
-const showdown = require('showdown');
-require('dotenv').config();
-const { GraphQLClient, gql } = require('graphql-request');
+const showdown = require("showdown");
+require("dotenv").config();
+const { GraphQLClient, gql } = require("graphql-request");
 
 const app = express();
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 converter = new showdown.Converter();
-
 // use "public" as a static folder
 app.use(express.static("public"));
-
-
 //port
 const port = 8080;
 
-//github username, token, endpoint
+//github api ---------------------------------
 const githubData = {
     token: process.env.GITHUB_API_TOKEN,
     username: process.env.USERNAME,
-    endpoint: "https://api.github.com/graphql"
+    endpoint: "https://api.github.com/graphql",
 };
 // graphQLCline GitHub
 const graphQLClineGitHub = new GraphQLClient(githubData.endpoint, {
     headers: {
-        authorization: `Bearer ${githubData['token']}`
+        authorization: `Bearer ${githubData["token"]}`,
     },
 });
 // graphQL query for pinned repo
 const pinnedRepoQuery = gql`{
-    user(login: "${githubData['username']}") {
+    user(login: "${githubData["username"]}") {
         url
         avatarUrl
         pinnedItems(last: 6) {
@@ -47,22 +44,21 @@ const pinnedRepoQuery = gql`{
     }
 }`;
 
-//hashnode api
+//hashnode api ---------------------------------
 const hashnodeData = {
     token: process.env.HASHNODE_API_TOKEN,
     username: process.env.USERNAME,
-    endpoint: "https://api.hashnode.com/"
-
-}
+    endpoint: "https://api.hashnode.com/",
+};
 // graphQLCline GitHub
 const graphQLClineHashnode = new GraphQLClient(hashnodeData.endpoint, {
     headers: {
-        authorization: `Bearer ${hashnodeData['token']}`
-    }
+        authorization: `Bearer ${hashnodeData["token"]}`,
+    },
 });
 // graphQL query for hashnode article
 const hashnodeQuerry = gql`{
-  user(username: "${hashnodeData['username']}") {
+  user(username: "${hashnodeData["username"]}") {
     publication {
       posts(page: 0) {
         title
@@ -93,12 +89,11 @@ app.get("/", async (req, res) => {
     });
 });
 
-
 //project route get
 app.get("/projects/:projectName", async (req, res) => {
     //graphQl query for repo info
     const repoInfoQuery = gql`{
-repository(name: "${req.params.projectName}", owner: "${githubData['username']}") {
+repository(name: "${req.params.projectName}", owner: "${githubData["username"]}") {
     url
     updatedAt
     upCase: object(expression: "HEAD:README.md") {
@@ -107,15 +102,17 @@ repository(name: "${req.params.projectName}", owner: "${githubData['username']}"
       }
     }
   }
-}`
+}`;
 
     const repoInfo = await graphQLClineGitHub.request(repoInfoQuery);
     let readmeHtml;
-    if (typeof repoInfo.repository.upCase.text === 'undefined' || repoInfo.repository.upCase.text === null) {
-        readmeHtml = "<h1>README.md dosen't exist.</h1>"
-    }
-    else {
-        readmeHtml = converter.makeHtml(repoInfo.repository.upCase.text)
+    if (
+        typeof repoInfo.repository.upCase.text === "undefined" ||
+        repoInfo.repository.upCase.text === null
+    ) {
+        readmeHtml = "<h1>README.md dosen't exist.</h1>";
+    } else {
+        readmeHtml = converter.makeHtml(repoInfo.repository.upCase.text);
     }
 
     res.render("project", {
@@ -125,16 +122,9 @@ repository(name: "${req.params.projectName}", owner: "${githubData['username']}"
     });
 });
 
-
-app.get("/a", async (req, res) => {
-    const info = await graphQLClineHashnode.request(hashnodeQuerry);
-    res.send(info);
-});
-
-
 //end------------------------------------------------------------------------
 
 
 app.listen(port, () => {
-    console.log("[Server]: Server is runing on http://localhost:" + port + '/');
+    console.log("[Server]: Server is runing on http://localhost:" + port + "/");
 });
