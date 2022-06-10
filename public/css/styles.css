@@ -4,6 +4,10 @@ body {
     /* filter: blur(8px);  */
 }
 
+img {
+    max-width: 100%;
+}
+
 .boundaryWidth{
     width: 84%;
 }
@@ -73,3 +77,46 @@ body {
     margin-right: 2vw;
     float: right;
 }
+
+.btn-linkedin {
+	  background: #0E76A8;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: none;
+	}
+	.btn-linkedin:link, .btn-linkedin:visited {
+	  color: #fff;
+	}
+	.btn-linkedin:active, .btn-linkedin:hover {
+	  background: #084461;
+	  color: #fff;
+	}
+
+.btn-twitter {
+	  background: #00ACEE;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: none;
+	}
+	.btn-twitter:link, .btn-twitter:visited {
+	  color: #fff; 
+	}
+	.btn-twitter:active, .btn-twitter:hover {
+	  background: #0075a2;
+	  color: #fff; 
+	}
+
+.btn-insta {
+	  background: radial-gradient(circle at 30% 107%, #e7df99 0%, #e8e191 1%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: none;
+	  
+	}
+	.btn-twitter:link, .btn-twitter:visited {
+	  color: #fff; 
+	}
+	.btn-twitter:active, .btn-twitter:hover {
+	  background: #0075a2;
+	  color: #fff; 
+	}
