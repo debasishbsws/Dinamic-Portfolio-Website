@@ -25,4 +25,4 @@
 ### - Details of every project is shown in a diffrent dinamic page using EJS.
   - Convert the README.md markdown to HTML abd render it to the screen. with github link of the projects and git URL.
  
-![ProjectReadme](//github/project.png)
+![ProjectReadme](/github/project.png)
